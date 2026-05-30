@@ -1,4 +1,106 @@
-square.addEventListener('click', () => {
-  isBlue = !isBlue;
-  square.classList.toggle('blue', isBlue);
-});
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Color Toggle</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+ 
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #0e0e0e;
+      font-family: 'Space Mono', monospace;
+      gap: 32px;
+    }
+ 
+    #label {
+      color: #555;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: color 0.4s ease;
+    }
+ 
+    #square {
+      width: 160px;
+      height: 160px;
+      background-color: #e63030;
+      cursor: pointer;
+      border-radius: 4px;
+ 
+      /* smooth color + shadow transition */
+      transition:
+        background-color 0.35s ease,
+        box-shadow 0.35s ease,
+        transform 0.12s ease;
+ 
+      box-shadow: 0 0 40px rgba(230, 48, 48, 0.45);
+    }
+ 
+    #square:hover {
+      transform: scale(1.06);
+    }
+ 
+    #square:active {
+      transform: scale(0.94);
+    }
+ 
+    #square.blue {
+      background-color: #2f6bde;
+      box-shadow: 0 0 40px rgba(47, 107, 222, 0.45);
+    }
+ 
+    #square.blue ~ #label {
+      color: #2f6bde;
+    }
+ 
+    #status {
+      color: #444;
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      min-height: 1em;
+      transition: color 0.35s ease;
+    }
+  </style>
+</head>
+<body>
+ 
+  <span id="label">click to toggle</span>
+ 
+  <div id="square"></div>
+ 
+  <span id="status">RED</span>
+ 
+  <script>
+    const square = document.getElementById('square');
+    const status = document.getElementById('status');
+    const label  = document.getElementById('label');
+ 
+    let isBlue = false;
+ 
+    square.addEventListener('click', () => {
+      isBlue = !isBlue;
+ 
+      if (isBlue) {
+        square.classList.add('blue');
+        status.textContent = 'BLUE';
+        status.style.color = '#2f6bde';
+        label.style.color  = '#2f6bde';
+      } else {
+        square.classList.remove('blue');
+        status.textContent = 'RED';
+        status.style.color = '#e63030';
+        label.style.color  = '#555';
+      }
+    });
+  </script>
+ 
+</body>
+</html>

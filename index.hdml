@@ -1,1 +1,4 @@
-
+square.addEventListener('click', () => {
+  isBlue = !isBlue;
+  square.classList.toggle('blue', isBlue);
+});
